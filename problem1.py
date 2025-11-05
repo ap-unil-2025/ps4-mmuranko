@@ -19,6 +19,7 @@ def create_number_list(start, end):
         >>> create_number_list(1, 5)
         [1, 2, 3, 4, 5]
     """
+    # problem 1.1
     # range(start, end+1) creates the numbers from start to end, including end
     # list() converts that into a list
     return list(range(start, end + 1))
@@ -38,6 +39,9 @@ def filter_even_numbers(numbers):
         >>> filter_even_numbers([1, 2, 3, 4, 5, 6])
         [2, 4, 6]
     """
+    # problem 1.2
+    # every element of numbers is checked for its divisibility by 2
+    # if it is divisible by 2, it gets added to the list even_numbers
     even_numbers = []
     for n in numbers:
         if n % 2 == 0:
@@ -59,6 +63,8 @@ def square_numbers(numbers):
         >>> square_numbers([1, 2, 3, 4])
         [1, 4, 9, 16]
     """
+    # problem 1.3
+    # all elements in numbers are squared and then added to the list squares
     squares=[]
     for n in numbers:
         squares.append(n**2)
@@ -79,8 +85,11 @@ def find_max_min(numbers):
         >>> find_max_min([3, 1, 4, 1, 5, 9, 2, 6])
         (9, 1)
     """
+    # problem 1.4
+    # max and min values are initially set to 0
     max_number=[0]
     min_number=[0]
+    # each number in numbers is compared to current max and min
     for n in numbers:
         if n>max_number[0]:
             max_number[0]=n
@@ -103,10 +112,14 @@ def remove_duplicates(items):
         >>> remove_duplicates([1, 2, 2, 3, 4, 3, 5])
         [1, 2, 3, 4, 5]
     """
-    # TODO: Implement this function
-    # Hint: You can use a loop and check if item is already in result list
-    # Or convert to set and back to list (but this doesn't preserve order)
-    pass
+    # problem 1.5
+    # every element of items is checked if it is already in unique_items
+    # if not, it gets added to unique_items
+    unique_items = []
+    for item in items:
+        if item not in unique_items:
+            unique_items.append(item)
+    return unique_items
 
 
 def merge_lists(list1, list2):
@@ -127,9 +140,20 @@ def merge_lists(list1, list2):
         >>> merge_lists([1, 2], [10, 20, 30, 40])
         [1, 10, 2, 20, 30, 40]
     """
-    # TODO: Implement this function
-    # Hint: Use a loop with index, handle different lengths
-    pass
+    # problem 1.6
+    # the shorter length of the two lists is determined
+    combined_list = []
+    short_len = min(len(list1), len(list2))
+    # elements from both lists are added alternately to combined_list until the end of the shorter list is reached
+    for i in range(short_len):
+        combined_list.append(list1[i])
+        combined_list.append(list2[i])
+    # remaining elements from the longer list are added to combined_list
+    if list1[short_len:] == [] and list2[short_len:] != []:
+        combined_list.extend(list2[short_len:])
+    elif list1[short_len:] != [] and list2[short_len:] == []:
+        combined_list.extend(list1[short_len:])
+    return combined_list
 
 
 def list_statistics(numbers):
@@ -146,12 +170,24 @@ def list_statistics(numbers):
         >>> list_statistics([1, 2, 3, 4, 5])
         {'sum': 15, 'average': 3.0, 'count': 5, 'max': 5, 'min': 1}
     """
+    # problem 1.7
+    # if the list is empty, return None
     if not numbers:
         return None
-
-    # TODO: Implement this function
-    # Calculate and return a dictionary with the statistics
-    pass
+    
+    # calculate sum, average, count, max, and min
+    total = sum(numbers)
+    count = len(numbers)
+    average = total / count
+    maximum = max(numbers)
+    minimum = min(numbers)
+    return {
+        'sum': total,
+        'average': average,
+        'count': count,
+        'max': maximum,
+        'min': minimum
+    }
 
 
 def chunk_list(items, chunk_size):
@@ -169,9 +205,13 @@ def chunk_list(items, chunk_size):
         >>> chunk_list([1, 2, 3, 4, 5, 6, 7], 3)
         [[1, 2, 3], [4, 5, 6], [7]]
     """
-    # TODO: Implement this function
-    # Hint: Use list slicing in a loop
-    pass
+    # problem 1.8
+    chunks = []
+    # range(0, len(items), chunk_size) generates starting indices for each chunk
+    # slices of items from i to i + chunk_size are created and added to chunks
+    for i in range(0, len(items), chunk_size):
+        chunks.append(items[i:i + chunk_size])
+    return chunks
 
 
 # Test cases

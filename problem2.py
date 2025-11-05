@@ -50,9 +50,10 @@ def get_value_safely(dictionary, key, default=None):
         'Not found'
     """
     # problem 2.2
-    # TODO: Implement this function
-    # Hint: Use the .get() method or check if key in dictionary
-    pass
+    # .get(key, default) tries to find the key.
+    # If it finds it, it returns the value.
+    # If it doesn't, it returns the default value
+    return dictionary.get(key, default)
 
 
 def merge_dictionaries(dict1, dict2):
@@ -71,9 +72,9 @@ def merge_dictionaries(dict1, dict2):
         {'a': 1, 'b': 3, 'c': 4}
     """
     # problem 2.3
-    # TODO: Implement this function
-    # Create a new dictionary with items from both
-    pass
+    # {**dict1} unpacks the first dict
+    # {**dict2} unpacks the second and overwrites any matching keys from dict1
+    return {**dict1, **dict2}
 
 
 def count_word_frequency(text):
@@ -92,13 +93,20 @@ def count_word_frequency(text):
         {'hello': 2, 'world': 1}
     """
     # problem 2.4
-    # TODO: Implement this function
-    # Steps:
-    # 1. Convert text to lowercase
-    # 2. Remove punctuation (you can use .replace() or import string)
+    # Converts text to lowercase and removes simple punctuation
+    cleaned_text = text.lower()
+    cleaned_text = cleaned_text.replace('.', '').replace(',', '').replace('!', '').replace('?', '')
+
     # 3. Split into words
+    words = cleaned_text.split()
+    
     # 4. Count each word's frequency
-    pass
+    frequency = {}
+    for word in words:
+        # Get the current count (or 0 if it's not there) and add 1
+        frequency[word] = frequency.get(word, 0) + 1
+    
+    return frequency
 
 
 def invert_dictionary(dictionary):

@@ -19,9 +19,9 @@ def create_number_list(start, end):
         >>> create_number_list(1, 5)
         [1, 2, 3, 4, 5]
     """
-    # TODO: Implement this function
-    # Hint: Use range() and convert to list
-    pass
+    # range(start, end+1) creates the numbers from start to end, including end
+    # list() converts that into a list
+    return list(range(start, end + 1))
 
 
 def filter_even_numbers(numbers):

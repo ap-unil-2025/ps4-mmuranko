@@ -38,9 +38,11 @@ def filter_even_numbers(numbers):
         >>> filter_even_numbers([1, 2, 3, 4, 5, 6])
         [2, 4, 6]
     """
-    # TODO: Implement this function
-    # You can use a loop or list comprehension
-    pass
+    even_numbers = []
+    for n in numbers:
+        if n % 2 == 0:
+            even_numbers.append(num)
+    return even_numbers
 
 
 def square_numbers(numbers):

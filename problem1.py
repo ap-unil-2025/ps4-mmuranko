@@ -41,7 +41,7 @@ def filter_even_numbers(numbers):
     even_numbers = []
     for n in numbers:
         if n % 2 == 0:
-            even_numbers.append(num)
+            even_numbers.append(n)
     return even_numbers
 
 
@@ -59,9 +59,10 @@ def square_numbers(numbers):
         >>> square_numbers([1, 2, 3, 4])
         [1, 4, 9, 16]
     """
-    # TODO: Implement this function
-    # Hint: Try a list comprehension!
-    pass
+    squares=[]
+    for n in numbers:
+        squares.append(n**2)
+    return squares
 
 
 def find_max_min(numbers):
@@ -78,9 +79,14 @@ def find_max_min(numbers):
         >>> find_max_min([3, 1, 4, 1, 5, 9, 2, 6])
         (9, 1)
     """
-    # TODO: Implement this function
-    # You can use max() and min() built-in functions
-    pass
+    max_number=[0]
+    min_number=[0]
+    for n in numbers:
+        if n>max_number[0]:
+            max_number[0]=n
+        if n<min_number[0] or min_number[0]==0:
+            min_number[0]=n
+    return (max_number[0], min_number[0])
 
 
 def remove_duplicates(items):

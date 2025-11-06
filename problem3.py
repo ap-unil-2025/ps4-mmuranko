@@ -76,8 +76,10 @@ def find_contact_by_name(contacts, name):
     # loops through the entire list of contact dicts until it finds a "name" key that is identical to the searched name
     # if no corresponding name is found, None is returned
     for contact in contacts:
+
         if contact["name"].lower() == name.lower():
             return contact
+        
     return None
 
 
@@ -101,11 +103,19 @@ def search_contacts(contacts, search_term):
         [{'name': 'Alice Smith', 'phone': '555-0001', 'email': ''}]
     """
     # problem 3.4
-    # TODO: Implement this function
-    # Find contacts where search_term appears in name OR phone
-    # Use .lower() for case-insensitive search
-    # Hint: Use 'in' operator to check if search_term is in the string
-    pass
+    # matches is going to be the list of all contact dicts that match the search term (which is turned lower case)
+    matches = []
+    search_term = search_term.lower()
+    # each entry for the keys "name" and "phone" of all contact dicts is compared to the search term
+    for contact in contacts:
+        name_matches = search_term in contact['name'].lower()
+        phone_matches = search_term in contact['phone']
+        
+        # if name_matches or phone_matches return TRUE, the corresponding contact dict gets added to the matches list
+        if name_matches or phone_matches:
+            matches.append(contact)
+            
+    return matches
 
 
 def delete_contact(contacts, name):
@@ -127,11 +137,17 @@ def delete_contact(contacts, name):
         0
     """
     # problem 3.5
-    # TODO: Implement this function
-    # Find the contact and remove it from the list
-    # Return True if found and deleted, False otherwise
-    # Hint: Use enumerate() to get index, then use .pop() to remove
-    pass
+    search_name = name.lower()
+
+    # .pop() uses the contact dict's list index
+    # enumerate() creates index, contact pairs
+    for index, contact in enumerate(contacts):
+        if contact['name'].lower() == search_name:
+            contacts.pop(index)
+            return True
+            
+    # If the loop finishes without finding the name, FALSE is returned
+    return False
 
 
 def count_contacts_with_email(contacts):
@@ -153,9 +169,11 @@ def count_contacts_with_email(contacts):
         1
     """
     # problem 3.6
-    # TODO: Implement this function
-    # Count contacts where email is not empty
-    pass
+    counter = 0
+    for contact in contacts:
+        if contact["email"] != "":
+            counter += 1
+    return counter
 
 
 def get_all_phone_numbers(contacts):
@@ -177,11 +195,11 @@ def get_all_phone_numbers(contacts):
         ['555-0001', '555-0002']
     """
     # problem 3.7
-    # TODO: Implement this function
-    # Extract phone number from each contact
-    # Hint: Use list comprehension or a loop
-    pass
-
+    phone_numbers = []
+    for contact in contacts:
+        phone_numbers.append(contact['phone'])
+        
+    return phone_numbers
 
 def sort_contacts_by_name(contacts):
     """
@@ -203,10 +221,12 @@ def sort_contacts_by_name(contacts):
         ['Alice', 'Charlie']
     """
     # problem 3.8
-    # TODO: Implement this function
-    # Use sorted() with a key function
-    # Hint: sorted(contacts, key=lambda c: c['name'])
-    pass
+    # "key" tells sorted() to look at each contact's "name" when comparing items
+    # lambda c: c["name"] is a function that does the following:
+    # for any contact c, get me c["name"]
+    sorted_list = sorted(contacts, key=lambda c: c['name'])
+    
+    return sorted_list
 
 
 def contact_exists(contacts, name):
@@ -221,9 +241,14 @@ def contact_exists(contacts, name):
         bool: True if contact exists, False otherwise
     """
     # problem 3.9
-    # TODO: Implement this function
-    # Use find_contact_by_name and check if result is not None
-    pass
+    # Use previous function:
+    contact = find_contact_by_name(contacts, name)
+    
+    # find_contact_by_name returns a dict (found) or None (not found)
+    if contact is not None:
+        return True
+    else:
+        return False
 
 
 # Test cases
